@@ -36,7 +36,7 @@ TrueMoney Voucher API (Ristruct) ช่วยให้คุณตรวจส�
 ---
 
 ## Authentication
-API นี้**บังคับใช้ API Key** ทุก request ไปยัง `/api/twgift` — ถ้าไม่ส่ง key หรือ key ไม่ถูกต้อง/ไม่ active จะได้ `401 Unauthorized` ทันที ไม่มีข้อยกเว้น
+API นี้**บังคับใช้ API Key** ทุก request ไปยัง `/api/tmw_gift` — ถ้าไม่ส่ง key หรือ key ไม่ถูกต้อง/ไม่ active จะได้ `401 Unauthorized` ทันที ไม่มีข้อยกเว้น
 
 **ขอ API-Key ได้ที่:** <ลิงก์ Discord ของคุณ>
 
@@ -53,7 +53,7 @@ Key ที่ออกให้ทุกตัวขึ้นต้นด้ว�
 
 ## Endpoint
 ```
-POST https://api.ristruct.dpdns.org/api/twgift
+POST https://api.ristruct.dpdns.org/api/tmw_gift
 ```
 หรือใช้ผ่าน **GET** request โดยส่งพารามิเตอร์ผ่าน query string
 
@@ -72,7 +72,7 @@ POST https://api.ristruct.dpdns.org/api/twgift
 
 ### cURL
 ```bash
-curl -X POST "https://api.ristruct.dpdns.org/api/twgift" \
+curl -X POST "https://api.ristruct.dpdns.org/api/tmw_gift" \
   -H "X-API-Key: tmk_xxxxxxxx" \
   -H "Content-Type: application/json" \
   -d '{
@@ -82,14 +82,14 @@ curl -X POST "https://api.ristruct.dpdns.org/api/twgift" \
 ```
 หรือใช้ GET request:
 ```bash
-curl "https://api.ristruct.dpdns.org/api/twgift?voucher=019b54d1844e7c99a68f3d394b249e3845X&phone=0982345678&apikey=tmk_xxxxxxxx"
+curl "https://api.ristruct.dpdns.org/api/tmw_gift?voucher=019b54d1844e7c99a68f3d394b249e3845X&phone=0982345678&apikey=tmk_xxxxxxxx"
 ```
 
 ### Python
 ```python
 import requests
 
-url = "https://api.ristruct.dpdns.org/api/twgift"
+url = "https://api.ristruct.dpdns.org/api/tmw_gift"
 headers = {"X-API-Key": "tmk_xxxxxxxx"}
 payload = {
     "voucher": "019b54d1844e7c99a68f3d394b249e3845X",
@@ -108,7 +108,7 @@ print(response.json())
 ### JavaScript
 ```javascript
 // Using fetch API
-const url = 'https://api.ristruct.dpdns.org/api/twgift';
+const url = 'https://api.ristruct.dpdns.org/api/tmw_gift';
 const apiKey = 'tmk_xxxxxxxx';
 const data = {
   voucher: '019b54d1844e7c99a68f3d394b249e3845X',
@@ -146,7 +146,7 @@ fetch(url, {
 ### PHP
 ```php
 <?php
-$url = "https://api.ristruct.dpdns.org/api/twgift";
+$url = "https://api.ristruct.dpdns.org/api/tmw_gift";
 
 $data = [
     "voucher" => "019b54d1844e7c99a68f3d394b249e3845X",
@@ -176,11 +176,11 @@ if ($httpCode == 200 && $result['status']['code'] === 'SUCCESS') {
 ```
 
 ### Cloudflare Workers
-เรียกจาก Worker ตัวอื่น (เช่นระบบเติมซองอัตโนมัติที่ deploy บน Cloudflare Workers เช่นกัน):
+เรียกจาก Worker:
 ```javascript
 export default {
   async fetch(request, env, ctx) {
-    const API_URL = "https://api.ristruct.dpdns.org/api/twgift";
+    const API_URL = "https://api.ristruct.dpdns.org/api/tmw_gift";
     const API_KEY = env.TMK_API_KEY; // เก็บผ่าน `wrangler secret put TMK_API_KEY`
 
     const payload = {
